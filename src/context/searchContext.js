@@ -1,14 +1,12 @@
-import React,{createContext,useState} from 'react';
-import { Children } from 'react';
-
+import React,{createContext,useState,useContext} from 'react';
 
 const SearchContext = createContext();
-const baseUrl ='https://google-search3.p.rapidapi.com/api/v1/'
+const baseUrl ='https://google-search3.p.rapidapi.com/api/v1'
 
-export const searchResultProvider=({children})=>{
+export const SearchResultProvider=({children})=>{
     const [result,setResult] = useState([])
     const [loading,setLoading] =useState(false)
-    const [searchItem,setSearchItem] = useState('')
+    const [searchItem,setSearchItem] = useState('salman khan')
 
     const getResults =async (type)=>{
         setLoading(true)
@@ -23,14 +21,21 @@ export const searchResultProvider=({children})=>{
               }
         })
         const data = await response.json()
+        console.log(data);
 
-        setResult(data)
+        if(type.includes("/images")){
+            setResult(data.image_results)
+        }else if(type.includes("/news")){
+            setResult(data.entries)
+        }else{
+            setResult(data.results)
+        }
         setLoading(false);
     }
 
     return(
         <SearchContext.Provider value={{getResults, loading,result,searchItem,setSearchItem}}>
-            {Children}
+            {children}
         </SearchContext.Provider>
     )
 
