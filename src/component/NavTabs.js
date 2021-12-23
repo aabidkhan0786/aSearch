@@ -5,15 +5,15 @@ const NavTabs = () => {
 
     const links = [
         { url: "/search", text: "All" },
-        { url: "/images", text: "Images" },
-        { url: "/videos", text: "Videos" },
+        { url: "/images", text: "| Images |" },
+        { url: "/videos", text: "| Videos |" },
         { url: "/news", text: "News" },
     ]
     return (
         <div>
             {
                 links.map(({url, text}) => (
-                    <NavLink to={url} activeClassName="text-danger">
+                    <NavLink to={url} activeClassName="text-danger text-underline" className="px-1" >
                         {text}
                     </NavLink>
                 ))

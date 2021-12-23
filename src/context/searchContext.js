@@ -21,7 +21,7 @@ export const SearchResultProvider=({children})=>{
               }
         })
         const data = await response.json()
-        console.log(data);
+        // console.log(data);
 
         if(type.includes("/images")){
             setResult(data.image_results)
